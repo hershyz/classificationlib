@@ -29,3 +29,30 @@ class Dataframe:
     def display(self):
         print(self.feature_map)
         print(self.point_arr)
+    
+    # make categorical input features numerical
+    def make_numerical(self):
+        
+        # generate int map
+        n = 0
+        int_map = {}
+        for col in range(len(self.feature_map)):
+            for row in range(len(self.point_arr)):
+                feature = self.point_arr[row][col]
+                try:
+                    float(feature)
+                except: # if float conversion fails, the feature is a string
+                    if feature not in int_map:
+                        int_map[feature] = n
+                        n += 1
+        self.int_map = int_map
+
+        # convert features to ints based on int map
+        for row in range(len(self.point_arr)):
+            for col in range(len(self.point_arr[row])):
+                if self.point_arr[row][col] in self.int_map:
+                    self.point_arr[row][col] = self.int_map[self.point_arr[row][col]]
+    
+    # getter for int map, must be called after make_numerical()
+    def get_int_map(self):
+        return self.int_map
