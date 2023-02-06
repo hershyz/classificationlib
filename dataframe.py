@@ -27,7 +27,7 @@ class Dataframe:
     
     # display vanilla datastructures
     def display(self):
-        print(self.feature_map)
+        print('features: ' + str(self.feature_map))
         print(self.point_arr)
     
     # make categorical input features numerical
@@ -53,6 +53,21 @@ class Dataframe:
                 if self.point_arr[row][col] in self.int_map:
                     self.point_arr[row][col] = self.int_map[self.point_arr[row][col]]
     
+    # get a specific column
+    def get_col(self, n):
+        res = []
+        for i in range(len(self.point_arr)):
+            res.append(float(self.point_arr[i][n]))
+        return res
+
     # getter for int map, must be called after make_numerical()
     def get_int_map(self):
         return self.int_map
+
+    # getter for feature map
+    def get_feature_map(self):
+        return self.feature_map
+
+    # getter for point arr    
+    def get_point_arr(self):
+        return self.point_arr

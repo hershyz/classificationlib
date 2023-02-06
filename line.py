@@ -46,6 +46,11 @@ class Line:
         for i in range(len(self.x)):
             predicted = self.predict(self.x[i])
             diff = abs(predicted - self.y[i])
-            error += (diff / self.y[i])
+            if self.x[i] == 0 and self.y[i] == 0:
+                error += 0
+            elif self.y[i] != 0:
+                error += (diff / self.y[i])
+            elif self.y[i] == 0:
+                error += (diff / self.x[i])
         error /= len(self.x)
         return 1 - error
