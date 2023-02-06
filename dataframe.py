@@ -71,3 +71,13 @@ class Dataframe:
     # getter for point arr    
     def get_point_arr(self):
         return self.point_arr
+    
+    # return raw data points with only the selected features
+    def get_condensed_point_arr(self, features):
+        res = []
+        for i in range(len(self.point_arr)):
+            row = []
+            for feature in features:
+                row.append(self.point_arr[i][self.feature_map[feature]])
+            res.append(row)
+        return res
