@@ -1,6 +1,8 @@
 import dataframe
+import line
 
-df = dataframe.Dataframe('test-data/Stars.csv')
-df.make_numerical()
-print(df.get_int_map())
-df.display()
+x = [1, 2, 3, 4]
+y = [1, 2, 3, 4]
+bab = line.Line(x, y)
+bab.display()
+print(bab.eval())
