@@ -27,8 +27,10 @@ class Dataframe:
     
     # display vanilla datastructures
     def display(self):
-        print('features: ' + str(self.feature_map))
-        print(self.point_arr)
+        print('feature index map: ' + str(self.feature_map))
+        print('data:')
+        for row in self.point_arr:
+            print(row)
     
     # make categorical input features numerical
     def make_numerical(self):
@@ -36,7 +38,7 @@ class Dataframe:
         # generate int map
         n = 0
         int_map = {}
-        for col in range(len(self.feature_map)):
+        for col in range(len(self.feature_map) - 1):
             for row in range(len(self.point_arr)):
                 feature = self.point_arr[row][col]
                 try:
@@ -52,13 +54,6 @@ class Dataframe:
             for col in range(len(self.point_arr[row])):
                 if self.point_arr[row][col] in self.int_map:
                     self.point_arr[row][col] = self.int_map[self.point_arr[row][col]]
-    
-    # get a specific column
-    def get_col(self, n):
-        res = []
-        for i in range(len(self.point_arr)):
-            res.append(float(self.point_arr[i][n]))
-        return res
 
     # getter for int map, must be called after make_numerical()
     def get_int_map(self):
@@ -71,13 +66,3 @@ class Dataframe:
     # getter for point arr    
     def get_point_arr(self):
         return self.point_arr
-    
-    # return raw data points with only the selected features
-    def get_condensed_point_arr(self, features):
-        res = []
-        for i in range(len(self.point_arr)):
-            row = []
-            for feature in features:
-                row.append(self.point_arr[i][self.feature_map[feature]])
-            res.append(row)
-        return res
