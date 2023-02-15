@@ -55,6 +55,13 @@ class Dataframe:
                 if self.point_arr[row][col] in self.int_map:
                     self.point_arr[row][col] = self.int_map[self.point_arr[row][col]]
 
+    # returns a column index as a 1d array
+    def get_col(self, index):
+        res = []
+        for row in self.point_arr:
+            res.append(row[index])
+        return res
+    
     # getter for int map, must be called after make_numerical()
     def get_int_map(self):
         return self.int_map
@@ -63,6 +70,19 @@ class Dataframe:
     def get_feature_map(self):
         return self.feature_map
 
-    # getter for point arr    
+    # get feature labels
+    def get_feature_labels(self):
+        feature_labels = []
+        for label in self.feature_map:
+            feature_labels.append(label)
+        return feature_labels
+    
+    # get input feature labels
+    def get_input_feature_labels(self):
+        input_feature_labels = self.get_feature_labels()
+        input_feature_labels.pop()
+        return input_feature_labels
+
+    # getter for point arr
     def get_point_arr(self):
         return self.point_arr
