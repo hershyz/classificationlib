@@ -36,15 +36,16 @@ class Dataframe:
     def make_numerical(self):
         
         # generate int map
-        n = 0
+        # n = 0
         int_map = {}
-        for col in range(len(self.feature_map) - 1):
-            for row in range(len(self.point_arr)):
-                feature = self.point_arr[row][col]
+        for i in range(len(self.point_arr)):
+            for j in range(len(self.feature_map) - 1):
+                feature = self.point_arr[i][j]
                 try:
                     float(feature)
                 except: # if float conversion fails, the feature is a string
                     if feature not in int_map:
+                        print(n)
                         int_map[feature] = n
                         n += 1
         self.int_map = int_map
@@ -86,3 +87,18 @@ class Dataframe:
     # getter for point arr
     def get_point_arr(self):
         return self.point_arr
+    
+    # get test points
+    def get_test_points(self):
+        
+        res = []
+        point_arr = self.point_arr
+        feature_map = self.feature_map
+
+        for row in point_arr:
+            map = {}
+            for feature in feature_map:
+                map[feature] = row[feature_map[feature]]
+            res.append(map)
+        
+        return res

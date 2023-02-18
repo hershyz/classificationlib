@@ -1,3 +1,5 @@
+import math
+
 class sqrt_distance_classifier_model:
     
     # constructor
@@ -41,6 +43,30 @@ class sqrt_distance_classifier_model:
 
 
 # getter for sqrt distance classifier model
-def get_model(df, input_features):
+def train(df, input_features):
     model = sqrt_distance_classifier_model(df, input_features)
     return model
+
+
+# prediction function
+def predict(point_map, model):
+    
+    min_dist = float('inf')
+    min_cat = ''
+
+    for cat in model.mean_map:
+        
+        avg_point = model.mean_map[cat]
+        dist = 0
+        
+        for feature in avg_point:
+            x1 = avg_point[feature]
+            x2 = point_map[feature]
+            dist += ((float(x1) - float(x2)) ** 2)
+        dist = math.sqrt(dist)
+
+        if dist < min_dist:
+            min_dist = dist
+            min_cat = cat
+    
+    return min_cat
