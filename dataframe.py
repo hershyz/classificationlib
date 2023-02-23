@@ -24,10 +24,13 @@ class Dataframe:
         for i in range(1, len(lines)):
             point_arr.append(lines[i].split(','))
         self.point_arr = point_arr
+
+        self.make_numerical()
     
     # display vanilla datastructures
     def display(self):
         print('feature index map: ' + str(self.feature_map))
+        print('label serialization int map: ' + str(self.int_map))
         print('data:')
         for row in self.point_arr:
             print(row)
@@ -36,7 +39,7 @@ class Dataframe:
     def make_numerical(self):
         
         # generate int map
-        # n = 0
+        n = 0
         int_map = {}
         for i in range(len(self.point_arr)):
             for j in range(len(self.feature_map) - 1):
@@ -45,7 +48,6 @@ class Dataframe:
                     float(feature)
                 except: # if float conversion fails, the feature is a string
                     if feature not in int_map:
-                        print(n)
                         int_map[feature] = n
                         n += 1
         self.int_map = int_map

@@ -70,3 +70,19 @@ def predict(point_map, model):
             min_cat = cat
     
     return min_cat
+
+
+# evaluate model accuracy
+def eval(model, df, output):
+
+    mean_map = model.mean_map
+    test_points = df.get_test_points()
+    correct = 0
+
+    for point in test_points:
+        real = point[output]
+        predicted = predict(point, model)
+        if predicted == real:
+            correct += 1
+    
+    return correct / len(test_points)
