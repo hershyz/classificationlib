@@ -38,6 +38,7 @@ class sqrt_distance_classifier_model:
     
     # display
     def display(self):
+        print('mean map:')
         for output in self.mean_map:
             print(output + ': ' + str(self.mean_map[output]))
 
@@ -75,7 +76,6 @@ def predict(point_map, model):
 # evaluate model accuracy
 def eval(model, df, output):
 
-    mean_map = model.mean_map
     test_points = df.get_test_points()
     correct = 0
 
