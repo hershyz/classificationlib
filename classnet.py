@@ -47,9 +47,17 @@ class classnet_model:
             weight /= len(feature_col)
             feature_weights[feature] = weight
         
-        # testing
-        print('feature weights:')
-        print(feature_weights)
-        print('output labels')
-        print(output_labels)
-
+        # testing - calculate percent error per feature:
+        percent_error_map = {}
+        for feature in feature_weights:
+            percent_error = 0
+            feature_col = df.get_col(feature_map[feature])
+            for i in range(len(feature_col)):
+                predicted = float(feature_weights[feature]) * float(feature_col[i])
+                real = output_col[i]
+                curr_error = (predicted - real) / real
+                percent_error += curr_error
+            percent_error /= len(feature_col)
+            percent_error_map[feature] = percent_error
+        
+        print(percent_error_map)
