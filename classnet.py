@@ -1,5 +1,8 @@
 class classnet_model:
 
+    def mean(self, arr):
+        return sum(arr) / len(arr)
+
     # constructor:
     def __init__(self, df, input_features):
 
@@ -32,32 +35,61 @@ class classnet_model:
             output_labels[output] = label
             label += step
         
-        # calculate init weights per input feature:
+        # calculate init weights per input feature -- TODO:
         feature_weights = {}
+        feature_map = df.get_feature_map()
         output_col = df.get_col(len(feature_map) - 1)
         for i in range(len(output_col)):
             output_col[i] = output_labels[output_col[i]]
+        
+        print(self.mean(output_col)) # BUG: WHY DOES THIS KEEP RETURNING DIFFERENT RESULTS, THE ARRAY IS THE SAME EACH TIME?!?!!?!?
 
-        for feature in input_features:
-            weight = 0
-            feature_col = df.get_col(feature_map[feature])
-            for i in range(len(feature_col)):
-                if float(feature_col[i]) != 0:
-                    weight += (float(output_col[i]) / float(feature_col[i]))
-            weight /= len(feature_col)
-            feature_weights[feature] = weight
-        
-        # testing - calculate percent error per feature:
-        percent_error_map = {}
-        for feature in feature_weights:
-            percent_error = 0
-            feature_col = df.get_col(feature_map[feature])
-            for i in range(len(feature_col)):
-                predicted = float(feature_weights[feature]) * float(feature_col[i])
-                real = output_col[i]
-                curr_error = (predicted - real) / real
-                percent_error += curr_error
-            percent_error /= len(feature_col)
-            percent_error_map[feature] = percent_error
-        
-        print(percent_error_map)
+        # calculate baseline error per input feature -- TODO:
+
+        # proportionally adjust weights depth first until error eaches min -- TODO:
+
+        self.feature_weights = feature_weights
+        self.output_labels = output_labels
+
+
+# getter for classnet model:
+def train(df, input_features):
+    model = classnet_model(df, input_features)
+    return model
+
+
+# prediction function:
+def predict(point_map, model):
+    
+    prediction_raw = 0
+    feature_weights = model.feature_weights
+    output_labels = model.output_labels
+
+    for feature in feature_weights:
+        prediction_raw += float(point_map[feature]) * float(feature_weights[feature])
+    prediction_raw /= len(feature_weights)
+
+    min_dist = float('inf')
+    min_output = ''
+    for output in output_labels:
+        diff = abs(prediction_raw - output_labels[output])
+        if diff < min_dist:
+            min_dist = diff
+            min_output = output
+    
+    return min_output
+
+
+# evaluate model accuracy
+def eval(model, df, output):
+
+    test_points = df.get_test_points()
+    correct = 0
+
+    for point in test_points:
+        real = point[output]
+        predicted = predict(point, model)
+        if predicted == real:
+            correct += 1
+    
+    return correct / len(test_points)
