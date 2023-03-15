@@ -6,5 +6,6 @@ import stddev_distance_classifier
 import knn
 import classnet
 
-df = dataframe.Dataframe('test-data/drug200.csv')
-classnet_model = classnet.train(df, ['Age','Sex','BP','Cholesterol','Na_to_K'])
+df = dataframe.Dataframe('test-data/heart.csv')
+model = classnet.train(df, ['age','trtbps','exng','oldpeak','slp','caa','thall'])
+print(classnet.eval(model, df, 'output'))
