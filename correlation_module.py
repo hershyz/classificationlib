@@ -50,6 +50,9 @@ def run(df):
         acc /= division_factor
         feature_accs.append([feature, acc])
 
-        # TODO: display sorted key column:
-    
-    print(feature_accs)
+    print('highest correlation')
+    print('---')
+    for i in range(len(feature_accs) - 1, -1, -1):
+        print(feature_accs[i][0])
+    print('---')
+    print('lowest correlation')

@@ -7,5 +7,26 @@ import knn
 import classnet
 import correlation_module
 
-df = dataframe.Dataframe('test-data/drug200.csv')
-correlation_module.run(df)
+'''
+highest correlation
+---
+thall
+caa
+slp
+oldpeak
+exng
+thalachh
+restecg
+fbs
+chol
+trtbps
+cp
+sex
+age
+---
+lowest correlation
+'''
+
+df = dataframe.Dataframe('test-data/heart.csv')
+model = classnet.train(df, ['thall', 'caa', 'slp', 'oldpeak', 'exng', 'thalachh', 'sex'])
+print(classnet.eval(model, df, 'output'))
