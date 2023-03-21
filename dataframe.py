@@ -104,3 +104,14 @@ class Dataframe:
             res.append(map)
         
         return res
+    
+    # convert point
+    def convert_point(self, point):
+        int_map = self.int_map
+        res = {}
+        for key in point:
+            if key in int_map:
+                res[key] = int_map[key]
+            else:
+                res[key] = point[key]
+        return res
