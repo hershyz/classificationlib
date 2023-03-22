@@ -110,8 +110,8 @@ class Dataframe:
         int_map = self.int_map
         res = {}
         for key in point:
-            if key in int_map:
-                res[key] = int_map[key]
+            if point[key] in int_map:
+                res[key] = int_map[point[key]]
             else:
                 res[key] = point[key]
         return res
