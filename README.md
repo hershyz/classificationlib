@@ -26,7 +26,7 @@ correlation_module.run(df)
 ```
 
 ```
-**output:**
+output:
 
 highest correlation
 ---
@@ -51,7 +51,7 @@ print(sqrt_distance_classifier.eval(model, df, 'Drug')) # get accuracy
 ```
 
 ```python
-**output:** 0.7
+output: 0.7
 ```
 
 ```python
@@ -68,7 +68,7 @@ print(sqrt_distance_classifier.predict(point_numerical, model))
 ```
 
 ```python
-**output:** DrugY
+output: DrugY
 ```
 
 ### Training + Predictions - Absolute Distance Classifier:
@@ -81,7 +81,7 @@ print(abs_distance_classifier.eval(model, df, 'Drug')) # get accuracy
 ```
 
 ```python
-**output:** 0.7
+output: 0.7
 ```
 
 ```python
@@ -98,7 +98,7 @@ print(abs_distance_classifier.predict(point_numerical, model))
 ```
 
 ```python
-**output:** DrugY
+output: DrugY
 ```
 
 ### Training + Predictions - Percent Distance Classifier:
@@ -111,7 +111,7 @@ print(percent_distance_classifier.eval(model, df, 'Drug')) # get accuracy
 ```
 
 ```python
-**output:** 0.715
+output: 0.715
 ```
 
 ```python
@@ -128,7 +128,7 @@ print(percent_distance_classifier.predict(point_numerical, model))
 ```
 
 ```python
-**output:** DrugY
+output: DrugY
 ```
 
 ### Training + Predictions - Standard Deviation Distance Classifier:
@@ -141,7 +141,7 @@ print(stddev_distance_classifier.eval(model, df, 'Drug')) # get accuracy
 ```
 
 ```python
-**output:** 0.705
+output: 0.705
 ```
 
 ```python
@@ -158,7 +158,7 @@ print(stddev_distance_classifier.predict(point_numerical, model))
 ```
 
 ```python
-**output:** DrugY
+output: DrugY
 ```
 
 ### Training + Predictions - ClassNet:
@@ -171,7 +171,7 @@ print(classnet.eval(model, df, 'Drug')) # get accuracy
 ```
 
 ```python
-**output:** 0.24
+output: 0.24
 ```
 
 ```python
@@ -188,7 +188,7 @@ print(classnet.predict(point_numerical, model))
 ```
 
 ```python
-**output:** DrugC
+output: DrugC
 ```
 
 ### Training + Predictions - KNN:
@@ -202,7 +202,7 @@ print(knn.eval(model, df, 'Drug'))
 ```
 
 ```python
-**output:** 0.88
+output: 0.88
 ```
 
 ```python
@@ -219,5 +219,5 @@ print(knn.predict(point_numerical, 'Drug', model))
 ```
 
 ```python
-**output:** DrugY
+output: DrugY
 ```
