@@ -1,5 +1,3 @@
-# Untitled
-
 ![logo.png](logo.png)
 
 Complete ML toolset for classification-based prediction problems.
